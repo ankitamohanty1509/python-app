@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'ankitamohanty1509/python-app'  // Change this to your actual DockerHub repo
+        DOCKER_IMAGE = 'ankitamohanty1509/python-app'  // Change this if needed
     }
 
     stages {
@@ -26,7 +26,7 @@ pipeline {
 
         stage('Login & Push to DockerHub') {
             steps {
-                withDockerHubRegistry(credentialsId: 'docker-hub-credentials') {
+                withDockerRegistry([credentialsId: 'docker-hub-credentials', url: '']) {
                     sh 'docker push $DOCKER_IMAGE:latest'
                 }
             }
